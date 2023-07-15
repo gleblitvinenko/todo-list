@@ -9,14 +9,18 @@
 <ul class="list-group">
   {% for task in task_list %}
     <li class="list-group-item">Content: {{ task.content }} <br>
-      Is done: {{ task.done }} <a class="btn btn-warning" href="{% url 'list:update-task-done' pk=task.id %}">
-        {% if task.done %}
+      Is done: {{ task.is_done }}
+        <form method="post" action="{% url 'list:update-task-done' pk=task.id %}">
+      {% csrf_token %}
+      <input type="hidden" name="task_id" value="{{ task.id }}">
+      <button type="submit" class="btn btn-warning">
+        {% if task.is_done %}
           Complete
           {% else %}
           Undo
         {% endif %}
-      </a><br>
-      Created time: {{ task.datetime }} <br>Deadline: {{ task.deadline }} <br>
+           </button><br>
+      Created time: {{ task.created_at }} <br>Deadline: {{ task.deadline }} <br>
       {% if task.tags %}
         <span>Tags:</span>
         {% for tag in task.tags.all  %}

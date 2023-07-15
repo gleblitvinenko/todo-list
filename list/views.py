@@ -1,5 +1,5 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.views import View, generic
 
@@ -28,15 +28,24 @@ class TakDeleteView(generic.DeleteView):
     success_url = reverse_lazy("list:index")
 
 
+# class TaskUpdateDoneView(View):
+#     def get(self, request, pk):
+#         task = get_object_or_404(Task, id=pk)
+#
+#         # Update the 'done' field
+#         task.done = not task.done
+#         task.save()
+#
+#         return HttpResponseRedirect(reverse("list:index"))
 class TaskUpdateDoneView(View):
-    def get(self, request, pk):
+    def post(self, request, pk):
         task = get_object_or_404(Task, id=pk)
 
         # Update the 'done' field
-        task.done = not task.done
+        task.is_done = not task.is_done
         task.save()
 
-        return HttpResponseRedirect(reverse("list:index"))
+        return redirect(reverse("list:index"))
 
 
 class TagListView(generic.ListView):

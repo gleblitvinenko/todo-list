@@ -1,7 +1,16 @@
 from django.urls import path
 
-from list.views import IndexView, TaskCreateView, TaskUpdateView, TakDeleteView, TaskUpdateDoneView, TagListView, \
-    TagCreateView, TagUpdateView, TagDeleteView
+from list.views import (
+    IndexView,
+    TaskCreateView,
+    TaskUpdateView,
+    TakDeleteView,
+    TaskUpdateDoneView,
+    TagListView,
+    TagCreateView,
+    TagUpdateView,
+    TagDeleteView
+)
 
 app_name = "list"
 
